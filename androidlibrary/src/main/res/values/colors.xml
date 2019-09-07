@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="lightGrey">#888888</color>
+
+    <color name="scrubberColor">#00b2b2</color>
+    <color name="playedColor">#00a839</color>
+    <color name="unplayedColor">#00e6ff</color>
+    <color name="bufferedColor">#ff0016</color>
+</resources>

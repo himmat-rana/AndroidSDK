@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?><!--<android.support.constraint.ConstraintLayout--><!--xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--tools:context=".view.main.VideoActivity"--><!--android:keepScreenOn="true">-->
+
+<!--<com.google.android.exoplayer2.ui.PlayerView--><!--android:id="@+id/playerView"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintEnd_toEndOf="parent"--><!--app:layout_constraintStart_toStartOf="parent"--><!--app:layout_constraintTop_toTopOf="parent"--><!--app:controller_layout_id="@layout/exo_controller_view"/>-->
+
+<!--</android.support.constraint.ConstraintLayout>-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:keepScreenOn="true"
+    tools:context=".view.main.VideoActivity">
+
+    <!--<com.google.android.exoplayer2.ui.PlayerView-->
+    <!--android:id="@+id/playerView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:resize_mode="zoom"-->
+    <!--app:use_controller="false"-->
+    <!--tools:foreground="#33ff0000" />-->
+
+    <!--<com.google.android.exoplayer2.ui.SimpleExoPlayerView-->
+    <!--android:id="@+id/playerView"-->
+    <!--android:focusable="true"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="2dp" />-->
+
+    <!--<ProgressBar-->
+    <!--android:id="@+id/progressBarVideoView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:visibility="visible" />-->
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@android:color/white"
+        android:focusable="true"
+        app:auto_show="true"
+        app:controller_layout_id="@layout/exo_controller_view"
+        app:fastforward_increment="3000"
+        app:repeat_toggle_modes="all"
+        app:resize_mode="fixed_width"
+        app:rewind_increment="3000"
+        app:show_buffering="true"
+        app:surface_type="surface_view"
+        app:use_controller="true" />
+    <!--app:repeat_toggle_modes="none"-->
+    <!--app:resize_mode="fill"-->
+    <!--app:resize_mode="zoom"-->
+</FrameLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frag_chat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".view.main.ChatActivityFragment"
+    tools:showIn="@layout/activity_chat">
+
+    <Button
+        android:id="@+id/btEndChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="95dp"
+        android:layout_marginEnd="5dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/endchat"
+        android:scaleType="fitXY"
+        android:text="@string/endchat"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ibAdd"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSendMessage" />
+    <!--android:background="#ffffff"-->
+    <!--style="?android:attr/borderlessButtonStyle"-->
+    <!--    style="?android:attr/borderlessButtonStyle"-->
+    <ImageButton
+        android:id="@+id/ibCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/camera"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSendMessage" />
+
+
+    <!--android:background="#ffffff"-->
+    <!--style="?android:attr/borderlessButtonStyle"-->
+    <ImageButton
+        android:id="@+id/ibAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/add"
+        android:foregroundGravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ibCamera"
+        app:layout_constraintTop_toBottomOf="@id/etSendMessage" />
+
+
+    <!--android:background="#ffffff"-->
+    <!--style="?android:attr/borderlessButtonStyle"-->
+
+    <ImageButton
+        android:id="@+id/btSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/ic_send"
+        android:contentDescription="@string/send"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/etSendMessage"
+        app:layout_constraintLeft_toRightOf="@id/etSendMessage"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etSendMessage" />
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/ibAttach"-->
+    <!--android:layout_width="60dp"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginStart="60dp"-->
+    <!--android:layout_marginEnd="7dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:contentDescription="@string/attach"-->
+    <!--android:scaleType="fitXY"-->
+    <!--android:src="@drawable/ic_attach"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintLeft_toRightOf="@id/btEndChat"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@id/etSendMessage" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChatMessages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/etSendMessage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etSendMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/send_message"
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/ibCamera"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btSend"
+        app:layout_constraintTop_toBottomOf="@id/rvChatMessages" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

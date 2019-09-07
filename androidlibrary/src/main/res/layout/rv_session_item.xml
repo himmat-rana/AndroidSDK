@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="@dimen/medium_padding">
+
+    <ImageView
+        android:id="@+id/ivCompanyLogo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/content_description_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvCompanyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="@dimen/medium_font_size"
+        app:layout_constraintLeft_toRightOf="@id/ivCompanyLogo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nublara Inc" />
+
+    <TextView
+        android:id="@+id/tvSessionTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lightGrey"
+        android:textSize="@dimen/small_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Session Time" />
+
+    <TextView
+        android:id="@+id/tvLatestMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/lightGrey"
+        android:textSize="@dimen/small_font_size"
+        app:layout_constraintLeft_toRightOf="@id/ivCompanyLogo"
+        app:layout_constraintRight_toLeftOf="@id/tvSessionStatus"
+        app:layout_constraintTop_toBottomOf="@+id/tvCompanyName"
+        tools:text="The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog." />
+
+
+    <TextView
+        android:id="@+id/tvSessionStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lightGrey"
+        android:textSize="@dimen/small_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSessionTime"
+        tools:text="Session Status" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
