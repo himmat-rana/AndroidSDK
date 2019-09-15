@@ -25,6 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(ctx, AppDatabase::class.java, "AppDatabase")
                     //.addCallback(prepopulateCallback(ctx))
+                    .fallbackToDestructiveMigration()
                     .build()
             }
 
