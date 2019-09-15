@@ -42,6 +42,14 @@
                 android:supportsPictureInPicture="true"
                 android:theme="@style/AppTheme.NoActionBar"/>
 
+        <service
+                android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+                android:enabled="true"/>
+
+        <uses-library
+                android:name="org.apache.http.legacy"
+                android:required="false"/>
+
     </application>
 
 </manifest>
