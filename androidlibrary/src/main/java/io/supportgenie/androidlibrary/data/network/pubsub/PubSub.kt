@@ -131,7 +131,9 @@ class PubSub() {
         runBlocking {
             GlobalScope.launch {
                 val client = websocketClient()
+
                 Log.d("test", "pubsub created websocketClient")
+
                 client.wss(host = host, port = 443, path = "/ws") {
                     Log.d("test", "pubsub created client.wss")
                     isConnected = true

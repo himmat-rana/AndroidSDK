@@ -22,6 +22,9 @@ class LibraryActivity : AppCompatActivity() {
     private lateinit var sessionsFragment: SessionsFragment
     private lateinit var pubsubListenersViewModel: PubSubListenersViewModel
 
+
+    lateinit var appUserId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
@@ -35,9 +38,15 @@ class LibraryActivity : AppCompatActivity() {
         println("inside Main Activity")
 
         recoverOrBuildSearchFragment()
+
         replaceFragment(R.id.mainView, sessionsFragment)  // Replaces the placeholder
-        val appUserId = "5c01c77a830f787e5e22135d"
-        val db = AppDatabase.getDatabase(getApplication())
+
+        //val appUserId = "5c01c77a830f787e5e22135d"
+        //TODO: getting the appUserId from intent from where this activity is started. maybe change in future
+
+        appUserId = intent.getStringExtra("userId")!!
+        val db = AppDatabase.getDatabase(application)
+
         db.syncFromServer(appUserId)
 
         PubSub.getPubsub().connect("staging-webservice.supportgenie.io")
