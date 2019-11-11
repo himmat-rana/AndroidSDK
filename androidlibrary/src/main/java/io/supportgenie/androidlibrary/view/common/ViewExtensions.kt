@@ -7,6 +7,11 @@ import androidx.lifecycle.*
 import androidx.fragment.app.*
 import kotlin.reflect.KClass
 
+fun <T : ViewModel> AppCompatActivity.getViewModel(modelClass: KClass<T>): T {
+    return ViewModelProviders.of(this).get(modelClass.java)
+}
+
+
 fun <T : ViewModel> FragmentActivity.getViewModel(modelClass: KClass<T>): T {
     return ViewModelProviders.of(this).get(modelClass.java)
 }

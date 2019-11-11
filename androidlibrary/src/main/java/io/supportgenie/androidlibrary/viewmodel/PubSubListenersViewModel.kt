@@ -20,5 +20,7 @@ class PubSubListenersViewModel(app: Application) : AndroidViewModel(app) {
     suspend fun getCompanyIds() : LiveData<List<String>> = withContext(Dispatchers.IO) {
         companyDao.loadAllIds()
     }
+
+
 }
 

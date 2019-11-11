@@ -1,5 +1,6 @@
 package io.supportgenie.androidlibrary
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -7,13 +8,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
 import io.supportgenie.androidlibrary.data.db.AppDatabase
+import io.supportgenie.androidlibrary.data.network.dto.NewSessionWrapper
+import io.supportgenie.androidlibrary.data.network.networkScope
 import io.supportgenie.androidlibrary.data.network.pubsub.PubSub
+import io.supportgenie.androidlibrary.data.network.sgApi
+import io.supportgenie.androidlibrary.model.NewSessionModel
+import io.supportgenie.androidlibrary.model.Session
 
 import kotlinx.android.synthetic.main.activity_library.*
 import io.supportgenie.androidlibrary.view.common.*
 import io.supportgenie.androidlibrary.view.main.ChatActivity
 import io.supportgenie.androidlibrary.view.main.SessionsFragment
 import io.supportgenie.androidlibrary.viewmodel.PubSubListenersViewModel
+import io.supportgenie.androidlibrary.viewmodel.SessionsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private const val SESSIONS_FRAGMENT_TAG = "SESSIONS_FRAGMENT"
 
@@ -21,19 +31,45 @@ private const val SESSIONS_FRAGMENT_TAG = "SESSIONS_FRAGMENT"
 class LibraryActivity : AppCompatActivity() {
     private lateinit var sessionsFragment: SessionsFragment
     private lateinit var pubsubListenersViewModel: PubSubListenersViewModel
+    private lateinit var appUserId: String
 
 
-    lateinit var appUserId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appUserId = intent.getStringExtra("userId")!!
+        val db = AppDatabase.getDatabase(application)
+
+        networkScope.launch {
+
+            val sessionDao = db.sessionDao()
+
+            val listSession : List<String> = sessionDao.loadAllIds()
+
+            if(listSession.isEmpty()){
+
+
+                val body = sgApi.createNewSession(NewSessionModel(appUserId,"5c01af56830f7879b727607d")).execute()?.body()
+
+                if(body!=null && body.success){
+                    db.syncFromServerTemp(appUserId)
+
+                    val intent = Intent(this@LibraryActivity, ChatActivity::class.java)
+                    intent.putExtra("sessionId", body.session!!.sessionId)
+                    intent.putExtra("companyId", body.session!!.companyId)
+                    startActivity(intent)
+
+                }
+            }
+
+
+        }
+
         setContentView(R.layout.activity_library)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        //sessionsViewModel = getViewModel(SessionsViewModel)
 
         println("inside Main Activity")
 
@@ -44,10 +80,34 @@ class LibraryActivity : AppCompatActivity() {
         //val appUserId = "5c01c77a830f787e5e22135d"
         //TODO: getting the appUserId from intent from where this activity is started. maybe change in future
 
-        appUserId = intent.getStringExtra("userId")!!
-        val db = AppDatabase.getDatabase(application)
 
-        db.syncFromServer(appUserId)
+
+
+        db.syncFromServerTemp(appUserId)
+
+        fab.setOnClickListener { view ->
+            val dialog = ProgressDialog(this)
+            dialog.setCancelable(false)
+            dialog.setMessage("Creating new Session...")
+
+
+            val userDao = AppDatabase.getDatabase(this).userDao()
+            dialog.show()
+
+            networkScope.launch {
+                val body = sgApi.createNewSession(NewSessionModel(appUserId,"5c01af56830f7879b727607d")).execute()?.body()
+
+                if(body!=null && body.success){
+                    db.syncFromServerTemp(appUserId)
+
+                    val intent = Intent(this@LibraryActivity, ChatActivity::class.java)
+                    intent.putExtra("sessionId", body.session!!.sessionId)
+                    intent.putExtra("companyId", body.session!!.companyId)
+                    startActivity(intent)
+                    dialog.cancel()
+                }
+            }
+        }
 
         PubSub.getPubsub().connect("staging-webservice.supportgenie.io")
         pubsubListenersViewModel = getViewModel(PubSubListenersViewModel::class)

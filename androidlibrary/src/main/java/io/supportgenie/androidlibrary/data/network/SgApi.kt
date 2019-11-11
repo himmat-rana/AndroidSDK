@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 import io.supportgenie.androidlibrary.data.network.dto.*
+import io.supportgenie.androidlibrary.model.NewSessionModel
 import io.supportgenie.androidlibrary.model.SessionParticipant
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -19,6 +20,13 @@ interface SgApi {
     fun getAppUsers(
         @Path("appUserId") appUserId: String
     ): Call<AppUsersWrapper>
+
+
+    //TODO: add flag when to use function getUserId and when getAppUsers
+    @GET("user/{userId}")              // Is appended to the base URL
+    fun getUserId(
+        @Path("userId") userID: String
+    ): Call<UserWrapper>
 
     @GET("user/sessions/{userId}")              // Is appended to the base URL
     fun getUserSessions(
@@ -52,6 +60,13 @@ interface SgApi {
     ): Call<SendMessageWrapper>
 
 
+
+
+    @Headers("Content-Type: application/json")
+    @POST("session/conversation/new")              // Is appended to the base URL
+    fun createNewSession(@Body params: NewSessionModel): Call<NewSessionWrapper<List<ParticipantDto>,NewSessionDataDto>>
+
+
     @Headers("Content-Type: application/json")
     @POST("session/end/{sessionId}")
     fun updateStatus(
@@ -59,5 +74,6 @@ interface SgApi {
     ):
 //       Call<SessionParticipantWrapper>
             Call<UpdateSessionWrapper>
+
 }
 

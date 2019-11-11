@@ -16,6 +16,8 @@ interface CompanyDao {
     @Query("SELECT * FROM company")
     fun loadAll(): LiveData<List<Company>>  // Note LiveData return type
 
+
+
     @Query("SELECT companyId FROM company")
     fun loadAllIds(): LiveData<List<String>>
 
@@ -48,6 +50,9 @@ interface UserDao {
 
     @Query("SELECT userId FROM user where companyId=:companyId")
     fun getUserId(companyId: String): String
+
+    @Query("SELECT companyId FROM user where userId=:userId")
+    fun getCompanyId(userId: String): String
 
     @Insert(onConflict = IGNORE)  // Do nothing if food with same NDBNO already exists
     fun insert(user: User) : Long

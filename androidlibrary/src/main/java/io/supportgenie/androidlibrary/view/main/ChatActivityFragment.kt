@@ -343,7 +343,8 @@ class ChatActivityFragment(private val sessionId: String, private val companyId:
                         //(rvChatMessages.adapter as? ChatListAdapter)?.notifyItemInserted(it.size)
                         //rvChatMessages.scrollToPosition(it.size)
                         println("item count after setting messages ${it.itemCount}")
-                        rvChatMessages.smoothScrollToPosition(it.itemCount - 1)
+                        if(it.itemCount>2)
+                            rvChatMessages.smoothScrollToPosition(it.itemCount - 1)
                     }
                 }
             })

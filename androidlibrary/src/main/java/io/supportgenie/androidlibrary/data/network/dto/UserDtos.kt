@@ -9,6 +9,25 @@ class AppUsersWrapper {
     var userData: UserDataDto? = null  // Navigates down the ‘item’ array
 }
 
+
+
+@JsonClass(generateAdapter = true)
+class UserWrapper {
+    lateinit var companyId: String
+    lateinit var photoUrl: String
+    var success: Boolean = false
+    lateinit var updatedAt: String
+    lateinit var userId: String
+    lateinit var userNumber: String
+    lateinit var type: String
+    var isActive: Boolean = true
+    var isAvailable: Boolean = true
+
+}
+
+
+
+
 @JsonClass(generateAdapter = true)
 class UserDto {
     lateinit var companyId: String

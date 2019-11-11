@@ -82,3 +82,24 @@ data class UpdateSessionData(
     @SerializedName("status") var status: String,
     @SerializedName("sessionId") var sessionId: String
 )
+
+@JsonClass(generateAdapter = true)
+class NewSessionWrapper<T, N>{
+    var success: Boolean = false
+    var participants: T? = null
+    var session: N? = null
+}
+
+@JsonClass(generateAdapter = true)
+class NewSessionDataDto {
+    lateinit var sessionId: String
+    lateinit var companyId: String
+    lateinit var createdAt: String
+    lateinit var updatedAt: String
+    lateinit var status: String
+    lateinit var type: String
+    lateinit var event: String
+    lateinit var lastActivityTime: String
+    lateinit var lastSeqNumber: String
+}
+
