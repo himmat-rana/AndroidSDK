@@ -27,13 +27,14 @@ fun listenForUserNewMessageEvents(userId:String, context: Context) {
     val topic = "io.supportgenie.session.message.user.$userId"
     println("listening to topic $topic")
     pubsub.registerListener(topic) {
-        println("got user new message event for ${userId}")
+        println("got user new message event for $userId")
         if (it != null) {
             val dto: PubSubChatMessageDto? = parseJsonValue<PubSubChatMessageDto>(it, PubSubChatMessageDto::class.java)
 
             if (dto != null) {
                 val db = AppDatabase.getDatabase(context)
                 val dao = db.chatMessageDao()
+                //TODO : used insertOrUpdate instead of insert
                 dao.insert(ChatMessage(dto))
             }
         }

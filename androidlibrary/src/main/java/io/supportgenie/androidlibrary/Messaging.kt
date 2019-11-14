@@ -80,6 +80,7 @@ fun sendTextMessage(message: String, sessionId: String, companyId: String, conte
             val messageSent: Boolean = sendMessageResult?.success?.let {
                 it
             } ?: false
+
             if (messageSent) {
                 println("message sent success")
                 updateMessageToDelivered(messageId)
@@ -174,6 +175,7 @@ fun sendJpgImage(message: String, sessionId: String, companyId: String, context:
     GlobalScope.launch {
         withContext(Dispatchers.IO) {
             // add the message to database
+
             val chaMessageDao = AppDatabase.getDatabase(context).chatMessageDao()
             val userDao = AppDatabase.getDatabase(context).userDao()
             val userId = userDao.getUserId(companyId)

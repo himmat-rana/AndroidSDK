@@ -39,9 +39,11 @@ private fun updateSessionParticipantData(userId: String, sessionId: String, comp
     val sessionParticipantsWrapper = sgApi.getSessionParticipants(sessionId).execute().body()
     val sessionParticipantsDto = sessionParticipantsWrapper?.participants
     val sessionParticipantdao = db.sessionParticipantDao()
-    sessionParticipantsDto?.forEach({
+    sessionParticipantsDto?.forEach {
+
+        //TODO : used insertOrUpdate instead of insert
         sessionParticipantdao.insert(SessionParticipant(sessionId, companyId, it))
-    })
+    }
 }
 
 fun listenForSessionEvents(userId:String, context: Context) {

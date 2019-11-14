@@ -30,34 +30,34 @@
     <!--style="?android:attr/borderlessButtonStyle"-->
     <!--    style="?android:attr/borderlessButtonStyle"-->
     <ImageButton
-        android:id="@+id/ibCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/camera"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSendMessage" />
+            android:id="@+id/ibCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/camera"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etSendMessage" />
 
 
     <!--android:background="#ffffff"-->
     <!--style="?android:attr/borderlessButtonStyle"-->
     <ImageButton
-        android:id="@+id/ibAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/add"
-        android:foregroundGravity="center"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/ibCamera"
-        app:layout_constraintTop_toBottomOf="@id/etSendMessage" />
+            android:id="@+id/ibAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/add"
+            android:foregroundGravity="center"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ibCamera"
+            app:layout_constraintTop_toBottomOf="@id/etSendMessage" />
 
 
     <!--android:background="#ffffff"-->

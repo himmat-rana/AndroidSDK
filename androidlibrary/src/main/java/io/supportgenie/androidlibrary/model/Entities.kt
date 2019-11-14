@@ -15,14 +15,17 @@ import io.supportgenie.androidlibrary.data.network.pubsub.PubSubChatMessageDto
 data class Company(val companyId: String, val name : String, val photoUrl: String, val website:String,
                    val updatedAt: String, val localUpdatedAt: Long) {
     constructor(companyDto: CompanyDto) : this(companyDto.companyId, companyDto.name, companyDto.photoUrl,
-        companyDto.website, companyDto.updatedAt,
-        getDbDateFromApiDate(companyDto.updatedAt)
+        companyDto.website, companyDto.updatedAt, getDbDateFromApiDate(companyDto.updatedAt)
     )
+    //TODO: added temp function for anonymous user
+    constructor(userWrapper: UserWrapper): this(userWrapper.companyId,"Naanmatic",userWrapper.photoUrl,"https://www.naanmatic.com",userWrapper.updatedAt,
+        getDbDateFromApiDate(userWrapper.updatedAt))
+
 }
 
 
-@Entity(tableName = "agent", primaryKeys = ["userId"],
-    indices = arrayOf(
+@Entity(tableName = "agent", primaryKeys = ["userId"]
+    /*indices = arrayOf(
         Index(value = ["companyId", "userId"], unique = true)
     ),
     foreignKeys = [
@@ -30,7 +33,7 @@ data class Company(val companyId: String, val name : String, val photoUrl: Strin
             entity = Company::class,
             parentColumns = ["companyId"],
             childColumns = ["companyId"]
-        )]
+        )]*/
     )
 data class Agent(val userId: String, val companyId : String, val name: String, val email: String, val phone: String,
                  val status: String, val isAvailable:Boolean, val photoUrl: String, val updatedAt: String, val localUpdatedAt: Long) {
@@ -40,8 +43,8 @@ data class Agent(val userId: String, val companyId : String, val name: String, v
     )
 }
 
-@Entity(tableName = "user", primaryKeys = ["userId"],
-    indices = arrayOf(
+@Entity(tableName = "user", primaryKeys = ["userId"]
+    /*indices = arrayOf(
         Index(value = ["companyId", "userId"], unique = true)
     ),
     foreignKeys = [
@@ -49,21 +52,21 @@ data class Agent(val userId: String, val companyId : String, val name: String, v
             entity = Company::class,
             parentColumns = ["companyId"],
             childColumns = ["companyId"]
-        )]
+        )]*/
     )
 data class User(val userId: String, val companyId : String, val isActive: Boolean, val updatedAt: String,
                 val localUpdatedAt: Long) {
     constructor(userDto: UserDto) : this(userDto.userId, userDto.companyId, userDto.isActive, userDto.updatedAt,
         getDbDateFromApiDate(userDto.updatedAt)
     )
+
+    //TODO: added constructor for anonymous user
+    constructor(user: UserWrapper): this(user.userId,user.companyId,user.isActive,user.updatedAt, getDbDateFromApiDate(user.updatedAt))
+
 }
 
-@Entity(tableName = "session", primaryKeys = ["sessionId"],
-    indices = arrayOf(
-        Index(value = ["userId"], unique = false),
-        Index(value = ["companyId"], unique = false)
-    ),
-    foreignKeys = [
+@Entity(tableName = "session", primaryKeys = ["sessionId"]
+    /*foreignKeys = [
         ForeignKey(
             entity = Company::class,
             parentColumns = ["companyId"],
@@ -74,7 +77,7 @@ data class User(val userId: String, val companyId : String, val isActive: Boolea
             entity = User::class,
             parentColumns = ["userId"],
             childColumns = ["userId"]
-        )]
+        )]*/
     )
 data class Session(val sessionId: String, val companyId : String, val userId: String, val type: String,
                    val status: String, val localCreatedAt: Long, val updatedAt: String, val localUpdatedAt: Long) {
@@ -90,8 +93,8 @@ data class Session(val sessionId: String, val companyId : String, val userId: St
     )
 }
 
-@Entity(tableName = "session_participant", primaryKeys = ["sessionId", "participant"],
-    indices = arrayOf(
+@Entity(tableName = "session_participant", primaryKeys = ["sessionId", "participant"]
+    /*indices = arrayOf(
         Index(value = ["companyId"],unique = false)
     ),
     foreignKeys = [
@@ -104,7 +107,7 @@ data class Session(val sessionId: String, val companyId : String, val userId: St
             entity = Session::class,
             parentColumns = ["sessionId"],
             childColumns = ["sessionId"]
-        )]
+        )]*/
     )
 data class SessionParticipant(val sessionId: String, val companyId : String, val participant: String,
                               val participantType: String, val status: String, val localCreatedAt: Long,
@@ -117,8 +120,8 @@ data class SessionParticipant(val sessionId: String, val companyId : String, val
 }
 
 
-@Entity(tableName = "chat_message", primaryKeys = ["messageId"],
-    indices = arrayOf(
+@Entity(tableName = "chat_message", primaryKeys = ["messageId"]
+    /*indices = arrayOf(
         Index(value = ["sessionId"], unique = false),
         Index(value = ["companyId"], unique = false)
     ),
@@ -132,7 +135,7 @@ data class SessionParticipant(val sessionId: String, val companyId : String, val
             entity = Session::class,
             parentColumns = ["sessionId"],
             childColumns = ["sessionId"]
-        )]
+        )]*/
     )
 data class ChatMessage(val messageId:String, val sessionId: String, val companyId : String, val sender: String,
                        val senderType: String, val message:String, val mimeType:String, val extraMessageData:String,

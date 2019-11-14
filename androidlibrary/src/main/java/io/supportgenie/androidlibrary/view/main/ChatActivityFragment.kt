@@ -1,6 +1,7 @@
 package io.supportgenie.androidlibrary.view.main
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Context
@@ -184,6 +185,7 @@ class ChatActivityFragment(private val sessionId: String, private val companyId:
         etSendMessage.onSubmit {
             sendTextMessage()
         }
+
 //        ibAttach.setOnClickListener {
 //            attachFile()
 //        }
@@ -341,7 +343,8 @@ class ChatActivityFragment(private val sessionId: String, private val companyId:
                         //(rvChatMessages.adapter as? ChatListAdapter)?.notifyItemInserted(it.size)
                         //rvChatMessages.scrollToPosition(it.size)
                         println("item count after setting messages ${it.itemCount}")
-                        rvChatMessages.smoothScrollToPosition(it.itemCount - 1)
+                        if(it.itemCount>2)
+                            rvChatMessages.smoothScrollToPosition(it.itemCount - 1)
                     }
                 }
             })
@@ -435,7 +438,7 @@ class ChatActivityFragment(private val sessionId: String, private val companyId:
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        // TODO Auto-generated method stub
+
         if (requestCode == GALLERY) {
             fileName = data.data!!.lastPathSegment!!
             val contentURI = data.data!!
@@ -833,6 +836,7 @@ class ChatActivityFragment(private val sessionId: String, private val companyId:
         transferUtility = TransferUtility(s3Client, context)
     }
 
+    @SuppressLint("MissingPermission")
     private fun isOnline(): Boolean {
         val cm = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netInfo = cm.activeNetworkInfo

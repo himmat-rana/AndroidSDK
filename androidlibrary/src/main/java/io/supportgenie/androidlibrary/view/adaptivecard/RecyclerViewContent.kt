@@ -20,19 +20,19 @@ class RecyclerViewContent {
     private var m_onFinishedRendering: ((recyclerViewContent: RecyclerViewContent) -> Unit)? = null
 
     private inner class CardRendererTask(
-        private val m_context: Context,
-        private val m_fragmentManager: FragmentManager,
-        private val m_cardActionHandler: ICardActionHandler,
-        private val m_hostConfig: HostConfig
+            private val m_context: Context,
+            private val m_fragmentManager: FragmentManager,
+            private val m_cardActionHandler: ICardActionHandler,
+            private val m_hostConfig: HostConfig
     ) : AsyncTask<ParseResult, Void, View>() {
         override fun doInBackground(vararg objects: ParseResult): View? {
             try {
                 val renderedCard = AdaptiveCardRenderer.getInstance().render(
-                    m_context,
-                    m_fragmentManager,
-                    objects[0].GetAdaptiveCard(),
-                    m_cardActionHandler,
-                    m_hostConfig
+                        m_context,
+                        m_fragmentManager,
+                        objects[0].GetAdaptiveCard(),
+                        m_cardActionHandler,
+                        m_hostConfig
                 )
                 return renderedCard.view
             } catch (e: Exception) {
@@ -55,12 +55,12 @@ class RecyclerViewContent {
 
 
     constructor(
-        parseResult: ParseResult,
-        context: Context,
-        fragmentManager: FragmentManager,
-        cardActionHandler: ICardActionHandler,
-        hostConfig: HostConfig,
-        onFinishedRendering: ((recyclerViewContent: RecyclerViewContent) -> Unit)?
+            parseResult: ParseResult,
+            context: Context,
+            fragmentManager: FragmentManager,
+            cardActionHandler: ICardActionHandler,
+            hostConfig: HostConfig,
+            onFinishedRendering: ((recyclerViewContent: RecyclerViewContent) -> Unit)?
     ) {
         m_onFinishedRendering = onFinishedRendering
         m_cardHasRendered = false
